@@ -10,7 +10,10 @@ passwordless.addDelivery((tokenToSend, uidToSend, recipient, callback) => {
 
 const serverOptions = {
   passwordless: passwordless,
-  onSuccessfulAuth: function() {}
+  onSuccessfulAuth: function() {},
+  getUserId: function(user, delivery, callback, req) {
+    callback(null, user);
+  }
 };
 
 function createServer(serverOptions) {
