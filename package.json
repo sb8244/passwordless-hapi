@@ -14,7 +14,6 @@
     "passwordless-memorystore": "0.0.1"
   },
   "dependencies": {
-    "hoek": "^3.0.4",
     "passwordless": "^1.1.1"
   }
 }
