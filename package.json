@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jasmine"
   },
-  "author": "",
+  "author": "Stephen Bussey",
   "license": "MIT",
   "devDependencies": {
     "hapi": "^13.3.0",
