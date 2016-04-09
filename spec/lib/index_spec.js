@@ -13,7 +13,7 @@ const serverOptions = {
   onSuccessfulAuth: function() {}
 };
 
-function createServer() {
+function createServer(serverOptions) {
   const server = new Hapi.Server();
 
   server.connection({
@@ -28,7 +28,7 @@ function createServer() {
   return server;
 }
 
-const server = createServer();
+const server = createServer(serverOptions);
 
 describe('POST /sendtoken', function() {
   beforeEach(function() {
@@ -76,6 +76,15 @@ describe('POST /sendtoken', function() {
     this.request.payload.user = false;
     server.inject(this.request, (response) => {
       expect(response.statusCode).toEqual(400);
+      done();
+    });
+  });
+
+  it('allows for sendTokenPath option', function(done) {
+    var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenRoute: '/newpath' }));
+    this.request.url = '/newpath';
+    optionedServer.inject(this.request, function(response) {
+      expect(response.statusCode).toEqual(200);
       done();
     });
   });
