@@ -66,6 +66,19 @@ describe('POST /sendtoken', function() {
     });
   });
 
+  it('executes options.sendTokenSuccessHandler', function(done) {
+    function sendTokenSuccessHandler(request, reply) {
+      reply.response().redirect('/');
+    }
+
+    var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenSuccessHandler: sendTokenSuccessHandler }));
+
+    optionedServer.inject(this.request, (response) => {
+      expect(response.statusCode).toEqual(302);
+      done();
+    });
+  });
+
   it('serves a 401 without a user', function(done) {
     this.request.payload.user = '';
     server.inject(this.request, (response) => {
