@@ -5,6 +5,12 @@ It tries to use the base passwordless code and only change the way it interacts 
 requests, replies, and session. Because of the difference in middleware between Express
 and Hapi, some functionality feels slightly more awkward.
 
+## Dependencies
+
+The only dependency is passwordless. This library currently only aims to support 1.1.1, but
+it may also work with previous versions. It technically is not constrainted by your Hapi version,
+although it may not work with really old Hapi versions.
+
 ## Getting you started
 
 The following should provide a quick-start in using Passwordless and Hapi. If you need more details check out the [example](https://github.com/florianheinemann/passwordless/tree/master/examples/simple-mail), the [deep dive](https://passwordless.net/deepdive), or the [documentation](https://passwordless.net/docs/Passwordless.html). Also, don't hesitate to raise comments and questions on [GitHub](https://github.com/florianheinemann/passwordless/issues).
