@@ -81,7 +81,7 @@ describe('POST /sendtoken', function() {
   });
 });
 
-describe('GET a known route with ?pwdless', function() {
+describe('GET a known route with ?token&uid', function() {
   describe('with a valid token', function() {
     beforeEach(function(done) {
       this.request = {
