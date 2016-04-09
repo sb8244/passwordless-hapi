@@ -107,4 +107,30 @@ describe('GET a known route with ?pwdless', function() {
       });
     });
   });
+
+  describe("with an invalid token", function() {
+    beforeEach(function(done) {
+      this.request = {
+        method: 'GET',
+        url: '/404notfound?token=invalid&uid=1'
+      };
+
+      passwordless._tokenStore.storeOrUpdate("token", "1", 60 * 60 * 1000, undefined, done);
+    });
+
+    it('passes through to the hapi handler', function(done) {
+      server.inject(this.request, (response) => {
+        expect(response.statusCode).toEqual(404);
+        done();
+      });
+    });
+
+    it('does not fire off the onSuccessfulAuth function', function(done) {
+      spyOn(serverOptions, "onSuccessfulAuth");
+      server.inject(this.request, (response) => {
+        expect(serverOptions.onSuccessfulAuth).not.toHaveBeenCalled();
+        done();
+      });
+    });
+  });
 });
