@@ -106,6 +106,19 @@ describe('GET a known route with ?pwdless', function() {
         done();
       });
     });
+
+    it('can not be used twice', function(done) {
+      spyOn(serverOptions, "onSuccessfulAuth");
+      server.inject(this.request, (response) => {
+        expect(serverOptions.onSuccessfulAuth).toHaveBeenCalledWith('1');
+
+        serverOptions.onSuccessfulAuth.calls.reset();
+        server.inject(this.request, (response) => {
+          expect(serverOptions.onSuccessfulAuth).not.toHaveBeenCalled();
+          done();
+        });
+      });
+    });
   });
 
   describe("with an invalid token", function() {
