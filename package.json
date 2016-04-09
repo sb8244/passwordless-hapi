@@ -1,0 +1,20 @@
+{
+  "name": "passwordless-hapi",
+  "version": "0.0.1",
+  "description": "Adapter for using passwordless with Hapi web server",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "hapi": "^13.3.0",
+    "jasmine": "^2.4.1",
+    "passwordless-memorystore": "0.0.1"
+  },
+  "dependencies": {
+    "hoek": "^3.0.4",
+    "passwordless": "^1.1.1"
+  }
+}
