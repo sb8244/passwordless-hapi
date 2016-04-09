@@ -81,7 +81,7 @@ describe('POST /sendtoken', function() {
   });
 
   it('allows for sendTokenPath option', function(done) {
-    var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenRoute: '/newpath' }));
+    var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenPath: '/newpath' }));
     this.request.url = '/newpath';
     optionedServer.inject(this.request, function(response) {
       expect(response.statusCode).toEqual(200);
