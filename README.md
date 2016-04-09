@@ -1,6 +1,6 @@
 # passwordless-hapi
 
-passwordless-hapi is a very thin adapter over top of the passwordless express middlware.
+passwordless-hapi is a very thin adapter over top of the passwordless express middleware.
 It tries to use the base passwordless code and only change the way it interacts with
 requests, replies, and session. Because of the difference in middleware between Express
 and Hapi, some functionality feels slightly more awkward.
@@ -94,5 +94,5 @@ write a server extension that uses session to check for a valid user id.
 
 ### 10. Who is logged in?
 
-passwordless-hapi does not provide middlware on top of the request. You can access the
+passwordless-hapi does not provide middleware on top of the request. You can access the
 user via your preferred session management code.
