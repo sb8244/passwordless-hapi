@@ -105,19 +105,6 @@ describe('POST /sendtoken', function() {
       done();
     });
   });
-
-  it('allows for sendTokenOnSuccess option', function(done) {
-    function sendTokenOnSuccess(passwordless) {
-      this.arguments = passwordless;
-    }
-
-    var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenOnSuccess: sendTokenOnSuccess }));
-    optionedServer.inject(this.request, function(response) {
-      expect(response.statusCode).toEqual(200);
-      expect(this.arguments).toEqual({ uidToAuth: 'test@test.com' });
-      done();
-    });
-  });
 });
 
 describe('GET a known route with ?token&uid', function() {
