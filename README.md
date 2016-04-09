@@ -65,7 +65,7 @@ server.register({
       // Called after a successful call to sendToken. Advised is to redirect
       reply.response().redirect('/check-your-email');
     },
-    sendTokenPath: '/sendToken' // this is optional if you want to have a custom send token path
+    sendTokenPath: '/sendtoken' // this is optional if you want to have a custom send token path
   }
 });
 
@@ -83,7 +83,7 @@ All you need is a form where users enter their email address, for example:
 <html>
 	<body>
 		<h1>Login</h1>
-		<form action="/sendToken" method="POST">
+		<form action="/sendtoken" method="POST">
 			Email:
 			<br><input name="user" type="text">
 			<br><input type="submit" value="Login">
