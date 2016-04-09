@@ -66,15 +66,16 @@ describe('POST /sendtoken', function() {
     });
   });
 
-  it('executes options.sendTokenSuccessHandler', function(done) {
+  it('executes options.sendTokenSuccessHandler with passwordless', function(done) {
     function sendTokenSuccessHandler(request, reply) {
-      reply.response().redirect('/');
+      reply.response().redirect('/' + request.passwordless.uidToAuth);
     }
 
     var optionedServer = createServer(Object.assign({}, serverOptions, { sendTokenSuccessHandler: sendTokenSuccessHandler }));
 
     optionedServer.inject(this.request, (response) => {
       expect(response.statusCode).toEqual(302);
+      expect(response.headers.location).toEqual('/test@test.com');
       done();
     });
   });
