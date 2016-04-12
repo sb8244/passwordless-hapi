@@ -1,6 +1,6 @@
 {
   "name": "passwordless-hapi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Adapter for using passwordless with Hapi web server",
   "main": "lib/index.js",
   "scripts": {
