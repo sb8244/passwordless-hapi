@@ -46,8 +46,9 @@ server.register({
   // All options are listed here
   options: {
     passwordless: passwordless, // your passwordless instance is required
-    onSuccessfulAuth: function(userId) { // anytime a successful validation occurs, this fires
+    onSuccessfulAuth: function(reply, userId) { // anytime a successful validation occurs, this fires
       // perform operations with the user id, like persisting to session
+      reply.continue(); // must be called if you want to pass through, otherwise handle the reply
     },
     getUserId: function(user, delivery, callback, req) { // the function that passwordless uses to validate users
       // usually you would want something like:

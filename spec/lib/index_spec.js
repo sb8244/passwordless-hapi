@@ -10,7 +10,9 @@ passwordless.addDelivery((tokenToSend, uidToSend, recipient, callback) => {
 
 const serverOptions = {
   passwordless: passwordless,
-  onSuccessfulAuth: function() {},
+  onSuccessfulAuth: function(reply) {
+    reply.continue();
+  },
   getUserId: function(user, delivery, callback, req) {
     callback(null, user);
   }
@@ -125,18 +127,30 @@ describe('GET a known route with ?token&uid', function() {
       });
     });
 
+    it('can override the reply handler', function(done) {
+      var optionedServer = createServer(Object.assign({}, serverOptions, { onSuccessfulAuth: function(reply) {
+        reply.response().redirect("/test");
+      }}));
+      optionedServer.inject(this.request, (response) => {
+        expect(response.statusCode).toEqual(302);
+        done();
+      });
+    });
+
     it('fires off the onSuccessfulAuth function with the user id', function(done) {
-      spyOn(serverOptions, "onSuccessfulAuth");
+      spyOn(serverOptions, "onSuccessfulAuth").and.callThrough();
       server.inject(this.request, (response) => {
-        expect(serverOptions.onSuccessfulAuth).toHaveBeenCalledWith('1');
+        expect(serverOptions.onSuccessfulAuth).toHaveBeenCalled();
+        expect(serverOptions.onSuccessfulAuth.calls.mostRecent().args[1]).toEqual('1');
         done();
       });
     });
 
     it('can not be used twice', function(done) {
-      spyOn(serverOptions, "onSuccessfulAuth");
+      spyOn(serverOptions, "onSuccessfulAuth").and.callThrough();
       server.inject(this.request, (response) => {
-        expect(serverOptions.onSuccessfulAuth).toHaveBeenCalledWith('1');
+        expect(serverOptions.onSuccessfulAuth).toHaveBeenCalled();
+        expect(serverOptions.onSuccessfulAuth.calls.mostRecent().args[1]).toEqual('1');
 
         serverOptions.onSuccessfulAuth.calls.reset();
         server.inject(this.request, (response) => {
